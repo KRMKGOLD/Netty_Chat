@@ -30,18 +30,18 @@ public class MainActivity extends AppCompatActivity {
     private BufferedReader in;
     private OutputStream out;
 
-
     @Override
     protected void onStart() {
         super.onStart();
-        startSocket();
-        run();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        startSocket();
+        run();
 
         roomList = new ArrayList<>();
 
@@ -97,9 +97,11 @@ public class MainActivity extends AppCompatActivity {
                                         roomList.add(room);
                                     }
 
-                                    Log.d("roomList", roomList.toString());
                                     adapter.setRoomList(roomList);
-                                    new Handler().post(() -> adapter.notifyItemRangeChanged(0, roomList.size()));
+                                    runOnUiThread(() -> adapter.notifyDataSetChanged());
+                                } else {
+                                    roomList.clear();
+                                    adapter.setRoomList(roomList);
                                 }
                                 break;
                         }

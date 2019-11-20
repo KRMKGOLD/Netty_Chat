@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
 
     private Context context;
-    private ArrayList<Room> roomList = new ArrayList<>();
+    private ArrayList<Room> roomList;
 
     MainAdapter(Context context, ArrayList<Room> roomList) {
         this.context = context;
@@ -36,7 +36,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
     @Override
     public int getItemCount() {
-        return 0;
+        return roomList.size();
     }
 
     void setRoomList(ArrayList<Room> roomList) {
